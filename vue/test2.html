@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app div {
+            width: 100px;
+            height: 100px;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="change('red')">red</button>
+        <button @click="change('green')">green</button>
+        <button @click="change('yellow')">yellow</button>
+        <div :class="color"></div>
+        <img :src="imgurl" alt="">
+    </div>
+
+
+    <script>
+        const vm = new Vue({
+            // el: '#app',
+            data: {
+                color: 'red',
+                imgurl: 'http://file02.16sucai.com/d/file/2014/0704/e53c868ee9e8e7b28c424b56afe2066d.jpg'
+            },
+            methods: {
+                change(color) {
+                    this.color = color
+                }
+            }
+        })
+        vm.$mount('#app')
+    </script>
+</body>
+
+</html>

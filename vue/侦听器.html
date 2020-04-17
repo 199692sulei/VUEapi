@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{msg}}
+        {{obj}}
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '苏磊你好呀',
+                obj: {
+                    name: '苏磊',
+                    age: 18
+                }
+            },
+            // watch:{
+            //  msg:function(newVal,oldVal){
+            //         console.log(`newVal:${newVal}`)
+            //         console.log(`oldVal:${oldVal}`)
+            //  }
+            // msg:'msgChange'
+            // msg:{
+            //     handler:function(){
+            //         console.log('msg值被改变了')
+            //     }
+            // }
+            // obj:{
+            //     handler(){
+            //         console.log('改变了')
+            //     },
+            //     deep:true,
+            //     immediate:true  //立刻调用
+            // }
+            // 'obj.name'(){
+            //     console.log('name改变了')
+            // }
+
+            // },
+
+            methods: {
+                msgChange() {
+                    console.log('msg值改变了')
+                }
+            },
+
+        })
+
+        // vm.$watch('msg', function () {
+        //     console.log('msg改变了')
+        // }, {
+        //     deep: true,
+        //     immediate: true
+        // })
+        vm.$watch('msg', {
+            handler() {
+
+            },
+            deep: true,
+            immediate: true
+        })
+    </script>
+</body>
+
+</html>

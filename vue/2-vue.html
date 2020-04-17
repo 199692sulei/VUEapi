@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- 指令 -->
+    <!-- 1 v-pre 闪现 不渲染-->
+    <!-- 2 v-cloak -->
+    <!-- 3 v-once 不会渲染-->
+    <!-- 4 v-html ===innerHTML XSS -->
+    <!-- 5 v-text -->
+    <!-- 6 v-if -->
+    <!-- 7 v-else -->
+    <!-- 8 v-else-if -->
+    <!-- 9 v-show true/false display  不支持template-->
+    <div id="app">
+        <div v-text="name"></div> 
+         <template v-if="flag">
+            <div v-if="flag">shanshan</div>
+            <div v-else>beautiful</div>
+        </template>
+        <div v-if="count==0">百度</div>
+        <div v-else-if="count==1">阿里</div>
+        <div v-else>腾讯</div>
+
+        <div v-show="flag">马路</div>
+        <!-- <div v-html="dom"></div>
+        <div v-cloak>
+            {{'a'}}
+        </div>
+        <div v-once>
+            {{name}}
+        </div>
+        {{desc}} -->
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                name: "sulei",
+                desc: "beautiful",
+                flag: true,
+                count:2,
+                dom: '<div>suqian</div>'
+            }
+        })
+    </script>
+</body>
+
+</html>

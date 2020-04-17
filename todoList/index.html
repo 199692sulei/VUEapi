@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="header">
+            <div class="container">
+                <div class="logo">toDoList</div>
+                <div class="input-area">
+                    <input type="text" @input="handleInput" :value='curMask'>
+                    <button @click="addDoList">添加</button>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h2>
+                <span>正在进行</span>
+                <span class="mask-num">{{needDoList.length}}</span>
+            </h2>
+            <ul class="mask-list">
+                <li v-for="(mask,index) in needDoList" :key="mask.id">
+                    <div>
+                        <input type="checkbox" @change="doCheck(index,'need')">
+                        <span>{{mask.title}}</span>
+                    </div>
+                    <button @click="deleteList(index,'need')">删除</button>
+                </li>
+            </ul>
+        </div>
+        <div class="container">
+            <h2>
+                <span>已经完成</span>
+                <span class="mask-num">{{completeList.length}}</span>
+            </h2>
+            <ul class="mask-list complete-list">
+                <li v-for="(mask,index) in completeList" :key="mask.id">
+                    <div>
+                        <input type="checkbox" @change="doCheck(index,'complete')">
+                        <span>{{mask.title}}</span>
+                    </div>
+                    <button @click="deleteList(index,'complete')">删除</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                curMask: '',
+                needDoList: [{
+                        title: '吃饭',
+                        id: 0
+                    },
+                    {
+                        title: '睡觉',
+                        id: 1
+                    },
+                    {
+                        title: '看电视',
+                        id: 2
+                    }
+                ],
+                completeList: []
+            },
+            methods: {
+                handleInput(e) {
+                    this.curMask = e.target.value
+                },
+                addDoList() {
+                    if (this.curMask === '') {
+                        return
+                    }
+                    this.needDoList.push({
+                        title: this.curMask,
+                        id: Math.random() * 10
+                    })
+                    this.curMask = ''
+                },
+                deleteList(index, type) {
+                    const toDoList = type === 'need' ? this.needDoList : this.completeList
+                    toDoList.splice(index, 1);
+                },
+                doCheck(index, type) {
+                    if (type == 'need') {
+                        const maskList = this.needDoList.splice(index, 1);
+                        this.completeList.push(...maskList)
+                    } else {
+                        const noCompleteList = this.completeList.splice(index, 1);
+                        this.needDoList.push(...noCompleteList)
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

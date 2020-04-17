@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #app div {
+            width: 100px;
+            height: 100px;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- v-bind<==>:-->
+    <!-- class [] {} -->
+    <!-- style {} [] -->
+    <!-- v-on @ -->
+    <div id="app">
+        <!-- <img :src="imgurl" alt="" :class="redClass" :class="{yellow:flag,green:greenFlag}"> -->
+        <!-- <div :style="[divStyle,divStyle1]">I love you</div> -->
+        <button @click="change('red')">red</button>
+        <button @click="change('blue')">blue</button>
+        <button @click="change('yellow')">yellow</button>
+        <div :class="color"></div>
+
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                imgurl: 'http://file02.16sucai.com/d/file/2014/0704/e53c868ee9e8e7b28c424b56afe2066d.jpg',
+                redClass: 'red',
+                blueClass: 'blue',
+                flag: true,
+                greenFlag: true,
+                color: 'red',
+                divStyle: {
+                    width: '100px',
+                    height: '100px',
+                    backgroundColor: 'green'
+                },
+                divStyle1: {
+                    color: "#f40"
+                }
+            },
+            methods: {
+                change(color) {
+                    this.color = color;
+                    console.log(this);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <my-cmp>苏磊最帅</my-cmp> -->
+        <!-- <my-cmp>
+
+            <template v-slot:header>
+                <div>头部</div>
+            </template>
+            <template v-slot:main>
+                <div>中部</div>
+            </template>
+            <template v-slot:footer>
+                <div>尾部</div>
+            </template>
+        </my-cmp> -->
+     <my-cmp1 v-slot="{user:person}">
+       {{person.name}}
+     </my-cmp1>
+
+    </div>
+
+    <script>
+         Vue.component('my-cmp1', {
+            data() {
+                return {
+                    user: {
+                        name: '苏磊',
+                        age: 18
+                    }
+                }
+            },
+            template: `
+             <div>
+             <slot :user="user"></slot>    
+            </div>
+
+`
+        })
+        Vue.component('my-cmp', {
+            data() {
+                return {
+                    user: {
+                        name: '苏磊',
+                        age: 18
+                    }
+                }
+            },
+            template: `
+            <div class="container">
+            <header>
+                <slot name="header"></slot>
+            </header>
+            <main>
+            <slot name="main"></slot>
+            </main>
+            <footer>
+            <slot name="footer"></slot>
+            </footer>
+     </div>
+
+
+`
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                name: "sulei"
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

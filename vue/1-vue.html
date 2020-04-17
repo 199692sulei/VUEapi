@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 插值表达式 -->
+        <!-- 我们使用的数据,需要先在data中存在 -->
+        <!-- 数据要先存在，才能实现数据绑定 -->
+        <!-- 通过索引的方式改变数组，不能渲染视图 -->
+        <!-- 通过长度的方法改变数组，不能渲染视图 -->
+        <!-- 数组变异方法 push pop shift unshift sort reverse slice -->
+        <!-- $set -->
+        <!-- $el -->
+        <!-- $nextTick -->
+        <!-- $mount  挂载-->
+        <!-- {{'a'}}
+        {{1}}
+        {{true}} -->
+        {{ arr }}
+        {{ name }}
+        {{ desc }}
+        {{ obj }}
+        {{ obj.xxx }}
+
+    </div>
+    <script>
+        const vm = new Vue({
+            // el: '#app',
+            data: {
+                name: "sulei",
+                desc: "zuishuai",
+                arr: [1, 2, 3],
+                obj: {
+                    a: 1,
+                    b: 10
+                }
+            }
+        })
+        vm.$mount('#app');
+        vm.name = "123";
+        vm.desc = "zc";
+        vm.$nextTick(() => {
+            console.log(vm.$el.innerText);
+
+        })
+    </script>
+</body>
+
+</html>

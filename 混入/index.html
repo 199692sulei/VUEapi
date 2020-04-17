@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <cmp-1></cmp-1>
+        <cmp-2></cmp-2>
+    </div>
+    <script>
+
+        Vue.mixin({
+            created(){
+                // console.log('全局混入')
+                const xxx=this.$options.xxx
+                if(xxx){
+                    console.log(xxx)
+                }
+            }
+        })
+        const mixin = {
+            data() {
+                return {
+                    a: 'a'
+                }
+            },
+            mounted(){
+                // console.log('mixin')
+            },
+            methods:{
+                fn(){
+                    console.log('mix fn')
+                }
+            }
+        }
+        Vue.component('cmp-1', {
+            xxx:'苏磊',
+            mixins:[mixin],
+            data() {
+                return {
+                    a: 'b'
+                }
+            },
+            mounted(){
+                // console.log(this.a)
+                this.fn()
+            },
+            methods:{
+                fn(){
+                    // console.log('cmp fn')
+                }
+            },
+            template: `
+               <div>cmp-1</div>
+              `
+        })
+        Vue.component('cmp-2', {
+            data() {
+                return {
+                    a: 'a'
+                }
+            },
+            template: `
+               <div>cmp-2</div>
+              `
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

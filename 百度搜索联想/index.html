@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <script src="./jquery.js"></script>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="logo">
+            <img src="https://www.baidu.com/img/bd_logo1.png?where=super" alt="" title="点击一下,了解更多">
+        </div>
+        <div class="search-box">
+            <span class="search-area">
+                <input 
+                type="text" 
+                maxlength="100" 
+                v-model="inputVal"
+                @focus='()=>inputFocus=true'
+                @blur='()=>inputFocus=false'
+                >
+                <span class="icon icon-paizhao"></span>
+            </span>
+            <span class="search-btn">百度一下</span>
+        </div>
+        <ul class="search-list" v-show="inputFocus&& searchResList.length">
+            <li v-for="(res,index) in searchResList" :key="res"
+            @click="func(index)"
+            >{{res}}</li>
+        </ul>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                inputVal: '',
+                inputFocus: false,
+                searchResList: []
+            },
+            methods: {
+                searchRes(res) {
+                    this.searchResList = res.s
+                    // console.log(res)
+                    // console.log(this.searchResList[0])
+                },
+                // func(index){
+                //     // let val=this.searchResList[0];
+                //     console.log(this.searchResList[index])
+                // }
+            },
+            watch: {
+                inputVal() {
+                    $.ajax({
+                        dataType: 'jsonp',
+                        url: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+                        data: {
+                            wd: this.inputVal,
+                            cb: 'vm.searchRes'
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- <div @click="alert('div')":style="{backgroundColor:'red'}">
+            <button @click.stop="alert('button')">点击</button>
+        </div> -->
+        <!-- <form action="" @submit.prevent="onSubmit">
+            <input type="submit">
+        </form> -->
+         <!-- <div @click.capture="alert('div')":style="{backgroundColor:'red'}">
+            <button @click="alert('button')">点击</button>
+        </div> -->
+        <!-- <div @click.once="alert('div')":style="{backgroundColor:'red'}">
+            <button @click="alert('button')">点击</button>
+        </div> -->
+
+        <input type="text" @keyup.esc='func'>
+        <input type="text" @keyup.space='func'>
+        <input type="text" @keyup.delete='func'>
+        <input type="text" @keyup.alt.exact='func'>
+        <input type="text" @keyup.shift.exact='func'>
+        <input type="text" @keyup.ctrl.exact='func'>
+        <input type="text" @keyup.arrow-left='func'>
+        <input type="text" @keyup.arrow-up='func'>
+        <input type="text" @keyup.arrow-right='func'>
+        <input type="text" @keyup.arrow-down='func'>
+        <input type="text" @keyup.enter='func'>
+    </div>
+
+    <script>
+        const vm=new Vue({
+            el:"#app",
+            methods:{
+                alert(str){alert(str)},
+                onSubmit(){
+                    console.log('123')
+                },
+                func(){
+                    console.log('123')
+                }
+            }
+        })
+    </script>
+    <!-- 
+        1. .stop 阻止事件冒泡
+        2. .prevent 阻止默认事件
+        3. .capture 事件捕获
+        4. .self
+        5. .once 只执行一次
+        6. passive 提升移动端性能
+         .passive prevent 不能一起使用
+
+         按键修饰符
+          .enter
+          .tab
+          .delete
+          .esc
+          .space
+          .up
+          .down
+          .left
+          .right
+          系统修饰符
+          .ctrl
+          .alt
+          .shift
+          .meta
+              
+           exact  2.5.0+
+           鼠标按钮修饰符
+           left
+           right
+           middle
+     -->
+</body>
+</html>

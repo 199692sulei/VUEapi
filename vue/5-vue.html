@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <!-- v-for -->
+    <div id="app">
+        <!-- <div v-for="(item, key ,index) in obj" :key="index">
+
+            {{ item }}--{{key}}--{{index}}</div> -->
+        <ul>
+            <!-- <li v-for="(person,index) in persons" :key="person.name" >
+                {{person.name}}
+                <input type="text">
+                <button @click="handleClick(index)">下移</button>
+            </li> -->
+            <li v-for="(item,index) in activePerson">
+                {{item.name}}
+            </li>
+        </ul>
+
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                arr: [1, 2, 3, 4],
+                persons: [{
+                        name: "sulei",
+                        age: 18,
+                        isActive: true
+                    },
+                    {
+                        name: 'suqian',
+                        age: 15,
+                        isActive: false
+                    },
+                    {
+                        name: 'suyang',
+                        age: 20,
+                        isActive: true
+                    },
+                    {
+                        name: 'sumeng',
+                        age: 19,
+                        isActive: false
+                    }
+                ],
+                activePerson: []
+
+
+
+            },
+            methods: {
+                handleClick(index) {
+                    const item = this.persons.splice(index, 1);
+                    this.persons.splice(index + 1, 0, ...item)
+                }
+            }
+        })
+
+        vm.activePerson=vm.persons.filter(item=>item.isActive)
+    </script>
+</body>
+
+</html>

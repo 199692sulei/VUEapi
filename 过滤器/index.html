@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{content| filter}}
+        {{money | money}}
+        {{money | wan}}
+    </div>
+    <script>
+        Vue.filter('filter', (val) => {
+            if (!val) {
+                return
+            }
+            return val.charAt(0).toUpperCase() + val.slice(1)
+        })
+        Vue.filter('money', (val) => {
+            if (!val) {
+                return
+            }
+            return val.toLocaleString()
+        })
+        Vue.filter('wan', (val) => {
+            if (!val) {
+                return
+            }
+            if (val > 10000) {
+                return (val / 10000).toFixed(1) + "万"
+            }
+            return val
+
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                content: 'sulei',
+                money: 145465
+            }
+        })
+    </script>
+</body>
+
+</html>
